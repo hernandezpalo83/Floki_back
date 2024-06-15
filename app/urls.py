@@ -13,7 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url, include
+from django.urls import path, include
 from django.contrib import admin
 from rest_framework import routers, serializers, viewsets
 from rest_framework_swagger.views import get_swagger_view
@@ -25,23 +25,23 @@ schema_view = get_swagger_view(title='Pastebin API')
 
 
 router = routers.DefaultRouter()
-router.register(r'Estado', EstadoViewSet)
-router.register(r'Sprint', SprintViewSet)
-router.register(r'Proyecto', ProyectoViewSet)
-router.register(r'Empresa', EmpresaViewSet)
-router.register(r'TipoTarea', Tipo_tareaViewSet)
-router.register(r'Tarea', TareaViewSet)
+router.register('Estado', EstadoViewSet)
+router.register('Sprint', SprintViewSet)
+router.register('Proyecto', ProyectoViewSet)
+router.register('Empresa', EmpresaViewSet)
+router.register('TipoTarea', Tipo_tareaViewSet)
+router.register('Tarea', TareaViewSet)
 
-router.register(r'Asignado', AsignadoViewSet)
-router.register(r'Observador', ObservadorViewSet)
-router.register(r'Comentario', ComentarioViewSet)
-router.register(r'Subtarea', SubtareaViewSet)
+router.register('Asignado', AsignadoViewSet)
+router.register('Observador', ObservadorViewSet)
+router.register('Comentario', ComentarioViewSet)
+router.register('Subtarea', SubtareaViewSet)
 
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^api/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'doc/', schema_view),
-    url(r'^', include(router.urls)),
+    path('admin/', admin.site.urls),
+    path('api/', include('rest_framework.urls', namespace='rest_framework')),
+    path('doc/', schema_view),
+    path('/', include(router.urls)),
 
 ]
